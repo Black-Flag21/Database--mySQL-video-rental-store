@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+
+@font-face {
+	font-family: 'SansationLight';
+	src: url('./FontSansationLight/SansationLight.eot');
+	src: local('SansationLight'), url('./FontSansationLight/SansationLight.woff') format('woff'), url('./FontSansationLight/SansationLight.ttf') format('truetype');
+}
+* {box-sizing: border-box}
+
+/* Set height of body and the document to 100% */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'SansationLight' !important;
+    background: rgb(22,22,22);
+}
+
+/* Style tab links */
+.tablink {
+	font-weight: bold;
+	font-family: 'SansationLight' !important;
+    background-color: #557;
+    color: azure;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 12px 12px;
+    font-size: 17px;
+    width: 12.5%;
+}
+
+.tablink:hover {
+    background-color: #579;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+    color: white;
+    padding: 100px 20px;
+    height: 100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    border-color: white;
+    text-align: center;
+}
+th, td {
+    padding: 15px;
+}
+
+.radiotext {
+    margin: 10px 10px 0px 0px;
+}
+
+</style>
+<script>
+	function myFunction() {
+  var rate_value = document.getElementsByName('region_id');
+
+	if(rate_value[0]){
+	alert(rate_value[0].value);
+	document.getElementsByName('id_film').value=rate_value[0].value;
+	alert(document.getElementsByName('id_film).value);
+  }}
+</script>
+</head>
+<body>
+
+  <a href="clienti"><button class="tablink" >Clienti</button></a>
+  <a href="contracte_inchirieri"><button class="tablink">Contracte Inchirieri</button></a>
+  <a href="detalii_film"><button class="tablink"  >Detalii Film</button></a>
+  <a href="film"><button class="tablink" style="background:rgb(70,130,180); color: white">Film</button></a>
+  <a href="particularitati"><button class="tablink">Particularitati</button></a>
+  <a href="film_particularitati"><button class="tablink">Particularitati Film</button></a>
+
+  <div id="Consilieri" class="tabcontent">
+	<center>
+		  <br>
+  		<h1 id="h3">Film Informatii</h1>
+  		<br><br>
+      <br><br><br><br>
+  		<table style="width:70%">
+  			<tr>
+    			<th>Id Film</th>
+    			<th>Buget</th>
+
+          <th>Editare</th>
+  			</tr>
+        {% for f in film %}
+  			<tr>
+    			<td>{{f["id_film"]}}</td>
+    			<td>{{f["buget"]}}</td>
+          <td>
+                <form class="was-validated" method="POST" action="/delFilm">
+                  <button type="submit" name="id_film" value="{{f['id_film']}}" class="btn btn-primary">Sterge Film</button>
+                </form>
+          </td>
+  			</tr>
+  			{% endfor %}
+		  </table>
+
+  </center>
+      <div id="Consilieri" class="tabcontent">
+	<center>
+		  <br>
+  		<h1 id="h3">Adauga Informatii</h1>
+       <br><br><br>
+      <form class="was-validated" method="POST" action="/addFilm">
+	   <div class="row">
+       <!-- <div class="col-md-6 mb-3">
+            <label for="validationServer01">Departament_ID</label>
+            <input name="department_id" type="text" class="form-control is-valid" id="validationServer01" placeholder="ex. 111 " required>
+          </div>-->
+		  <div class="col-md-6 mb-3">
+            <label for="validationServer01">ID Film</label>
+            <input name="id_film" type="number" class="form-control is-valid" id="validationServer01" placeholder="ex. 111" required>
+          </div>
+           <div class="col-md-6 mb-3">
+            <label for="validationServer01">Buget</label>
+            <input name="buget" type="number" class="form-control is-valid" id="validationServer01" placeholder="ex. 10.0000.000" required>
+          </div>
+       </div>
+
+        <button class="btn btn-primary" type="submit">Adauga Informatii</button>
+      </form>
+<br>
+  </center>
+      </div>
+
+
+</body>
+</html>

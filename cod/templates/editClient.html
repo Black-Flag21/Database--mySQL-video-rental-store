@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<style>
+
+@font-face {
+  font-family: 'SansationLight';
+  src: url('./FontSansationLight/SansationLight.eot');
+  src: local('SansationLight'), url('./FontSansationLight/SansationLight.woff') format('woff'), url('./FontSansationLight/SansationLight.ttf') format('truetype');
+}
+* {box-sizing: border-box}
+
+/* Set height of body and the document to 100% */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'SansationLight' !important;
+    background: rgb(22,22,22);
+}
+
+/* Style tab links */
+.tablink {
+	font-weight: bold;
+	font-family: 'SansationLight' !important;
+    background-color: #557;
+    color: azure;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 12px 12px;
+    font-size: 17px;
+    width: 12.5%;
+}
+
+.tablink:hover {
+    background-color: #579;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+    color: white;
+    padding: 100px 20px;
+    height: 100%;
+}
+
+#Consilieri {background-color: rgb(22,22,22);}
+#Partide {background-color: rgb(22,22,22);}
+#Comisii {background-color: rgb(22,22,22);}
+#Pontaje {background-color: rgb(22,22,22);}
+</style>
+</head>
+<body>
+
+  <a href="clienti"><button class="tablink" style="background:rgb(70,130,180); color: white">Clienti</button></a>
+  <a href="contracte_inchirieri"><button class="tablink">Contracte Inchirieri</button></a>
+  <a href="detalii_film"><button class="tablink">Detalii Film</button></a>
+  <a href="film"><button class="tablink">Film</button></a>
+  <a href="particularitati"><button class="tablink">Particularitati</button></a>
+  <a href="film_particularitati"><button class="tablink">Particularitati Film</button></a>
+
+  <div id="Consilieri" class="tabcontent">
+  <center>
+      <br>
+      <h1 id="h3">Editare client</h1>
+      <br><br><br>
+      <form class="was-validated" method="POST" action="/editClient">
+
+         <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="validationServer01">ID Client</label>
+            <input name="id_client" type="number" class="form-control is-valid" id="validationServer01" value="{{id_client}}" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationServer01">Serie act</label>
+            <input name="serie_act_identitate" type="text" class="form-control is-valid" id="validationServer01" value="{{serie_act_identitate}}" required>
+          </div>
+		  <div class="col-md-6 mb-3">
+            <label for="validationServer01">Tip act</label>
+            <input name="tip_act" type="text" class="form-control is-valid" id="validationServer01" value="{{tip_act}}" required>
+          </div>
+		  <div class="col-md-6 mb-3">
+            <label for="validationServer01">Nume</label>
+            <input name="nume" type="text" class="form-control is-valid" id="validationServer01" value="{{nume}}" required>
+          </div>
+		  <div class="col-md-6 mb-3">
+            <label for="validationServer01">Prenume</label>
+            <input name="prenume" type="text" class="form-control is-valid" id="validationServer01" value="{{prenume}}" required>
+          </div>
+		  <div class="col-md-6 mb-3">
+            <label for="validationServer01">Email</label>
+            <input name="email" type="email" class="form-control is-valid" id="validationServer01" value="{{email}}" required>
+          </div>
+		  <div class="col-md-6 mb-3">
+            <label for="validationServer01">Numar telefon</label>
+            <input name="nr_telefon" type="text" class="form-control is-valid" id="validationServer01" value="{{nr_telefon}}" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationServer01">Data Nasterii</label>
+            <input name="data_nasterii" type="date" class="form-control is-valid" id="validationServer01" value="{{data_nasterii}}" required>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Editeaza Client</button>
+      </form>
+
+  </center>
+      </div>
+
+  <script type="text/javascript">
+  function checkDuplicates() {
+        var selects = document.getElementsByTagName('select');
+        var values = [];
+        for(i=0;i<selects.length;i++) {
+            var select = selects[i];
+            if(values.indexOf(select.value)>-1) {
+                alert('Comisia ' + i + ' a fost aleasa de mai multe ori!'); //if duplicates found we are returning. without save and no need to continue.
+                return false;
+            }
+            values.push(select.value)
+        }
+        return true;
+    //saveform here
+    }
+  /*
+  $dropdown1.change(function() {
+    $dropdown2.children().show();
+    var selectedItem = $($dropdown1).val();
+    if (selectedItem != "")
+      $('select[name="dropdown2"] option[value="' + selectedItem + '"]').hide();
+  });
+
+  $dropdown2.change(function() {
+    $dropdown1.children().show();
+    var selectedItem = $($dropdown2).val();
+    if (selectedItem != "")
+      $('select[name="dropdown1"] option[value="' + selectedItem + '"]').hide();
+  });
+
+  $dropdown3.change(function() {
+    $dropdown1.children().show();
+    $dropdown2.children().show();
+    var selectedItem1 = $($dropdown1).val();
+    var selectedItem2 = $($dropdown2).val();
+    if (selectedItem1 != "" || selectedItem2 != ""){
+      $('select[name="dropdown3"] option[value="' + selectedItem1 + '"]').hide();
+      $('select[name="dropdown3"] option[value="' + selectedItem2 + '"]').hide();
+    }
+  });
+  */
+</script>
+
+</body>
+</html>

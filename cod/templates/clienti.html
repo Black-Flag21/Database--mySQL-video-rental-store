@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+
+@font-face {
+	font-family: 'SansationLight';
+	src: url('./FontSansationLight/SansationLight.eot');
+	src: local('SansationLight'), url('./FontSansationLight/SansationLight.woff') format('woff'), url('./FontSansationLight/SansationLight.ttf') format('truetype');
+}
+* {box-sizing: border-box}
+
+/* Set height of body and the document to 100% */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'SansationLight' !important;
+    background: rgb(22,22,22);
+}
+
+/* Style tab links */
+.tablink {
+	font-weight: bold;
+	font-family: 'SansationLight' !important;
+    background-color: #557;
+    color: azure;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 12px 12px;
+    font-size: 17px;
+    width: 12.5%;
+}
+
+.tablink:hover {
+    background-color: #579;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+    color: white;
+    padding: 100px 20px;
+    height: 100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    border-color: white;
+    text-align: center;
+}
+th, td {
+    padding: 15px;
+}
+
+.radiotext {
+    margin: 10px 10px 0px 0px;
+}
+
+</style>
+<script>
+	function myFunction() {
+  var rate_value = document.getElementsByName('region_id');
+
+	if(rate_value[0]){
+	alert(rate_value[0].value);
+	document.getElementsByName('id_client').value=rate_value[0].value;
+	alert(document.getElementsByName('id_client').value);
+  }}
+</script>
+</head>
+<body>
+
+  <a href="clienti"><button class="tablink" style="background:rgb(70,130,180); color: white">Clienti</button></a>
+  <a href="contracte_inchirieri"><button class="tablink">Contracte Inchirieri</button></a>
+  <a href="detalii_film"><button class="tablink">Detalii Film</button></a>
+  <a href="film"><button class="tablink">Film</button></a>
+  <a href="particularitati"><button class="tablink">Particularitati</button></a>
+  <a href="film_particularitati"><button class="tablink">Particularitati Film</button></a>
+
+  <div id="Consilieri" class="tabcontent">
+	<center>
+		  <br>
+  		<h1 id="h3">Clienti</h1>
+  		<br><br>
+      <div class="btn-group">
+        <a href="addClient"><button type="button" class="btn btn-primary" >Adauga Client</button></a>
+        <br>
+		    <br>
+      </div>
+      <br><br><br><br>
+  		<table style="width:70%">
+  			<tr>
+    			<th>id_client</th>
+    			<th>serie_act_identitate</th>
+    			<th>tip_act</th>
+    			<th>nume</th>
+    			<th>prenume</th>
+    			<th>email</th>
+			    <th>nr_telefon</th>
+                <th>&nbsp;data_nasterii&nbsp;</th>
+
+          <th>Editare/Stergere</th>
+  			</tr>
+        {% for client in clienti %}
+  			<tr>
+
+    			<td>{{client["id_client"]}}</td>
+    			<td>{{client["serie_act_identitate"]}}</td>
+    			<td>{{client["tip_act"]}}</td>
+    			<td>{{client["nume"]}}</td>
+    			<td>{{client["prenume"]}}</td>
+    			<td>{{client["email"]}}</td>
+				<td>{{client["nr_telefon"]}}</td>
+				<td>{{client["data_nasterii"]}}</td>
+
+          <td>
+                <form class="was-validated" method="POST" action="/getClient">
+                  <button type="submit" name="id_client" value="{{client['id_client']}}" class="btn btn-primary">Editeaza client</button>
+                </form>
+              <br>
+                <form class="was-validated" method="POST" action="/delClient">
+                  <button type="submit" name="id_client" value="{{client['id_client']}}" class="btn btn-primary">Sterge client</button>
+                </form>
+
+          </td>
+  			</tr>
+  			{% endfor %}
+		  </table>
+      <br><br><br>
+  </center>
+      </div>
+
+</body>
+</html>

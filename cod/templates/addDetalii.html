@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<style>
+
+@font-face {
+	font-family: 'SansationLight';
+	src: url('./FontSansationLight/SansationLight.eot');
+	src: local('SansationLight'), url('./FontSansationLight/SansationLight.woff') format('woff'), url('./FontSansationLight/SansationLight.ttf') format('truetype');
+}
+* {box-sizing: border-box}
+
+/* Set height of body and the document to 100% */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'SansationLight' !important;
+    background: rgb(22,22,22);
+}
+
+/* Style tab links */
+.tablink {
+	font-weight: bold;
+	font-family: 'SansationLight' !important;
+    background-color: #557;
+    color: azure;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 12px 12px;
+    font-size: 17px;
+    width: 12.5%;
+}
+
+.tablink:hover {
+    background-color: #579;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+    color: white;
+    padding: 100px 20px;
+    height: 100%;
+}
+
+#Consilieri {background-color: rgb(22,22,22);}
+#Partide {background-color: rgb(22,22,22);}
+#Comisii {background-color: rgb(22,22,22);}
+#Pontaje {background-color: rgb(22,22,22);}
+</style>
+</head>
+<body>
+
+  <a href="clienti"><button class="tablink" >Clienti</button></a>
+  <a href="contracte_inchirieri"><button class="tablink">Contracte Inchirieri</button></a>
+  <a href="detalii_film"><button class="tablink" style="background:rgb(70,130,180); color: white">Detalii Film</button></a>
+  <a href="film"><button class="tablink">Film</button></a>
+  <a href="particularitati"><button class="tablink">Particularitati</button></a>
+  <a href="film_particularitati"><button class="tablink">Particularitati Film</button></a>
+
+  <div id="detalii_film" class="tabcontent">
+	<center>
+		  <br>
+  		<h1 id="h3">Adaugare Film</h1>
+      <br><br><br>
+      <form class="was-validated" method="POST" action="/addDetalii">
+        <div class="row">
+			<!--<div class="col-md-6 mb-3">
+            <label for="validationServer01">Employee id</label>
+            <input name="employee_id" type="number" class="form-control is-valid" id="validationServer01" placeholder="ex. 22 " required>
+			</div>-->
+           <div class="col-md-6 mb-3">
+            <label for="validationServer01">ID Film</label>
+            <input name="id_film" type="number" class="form-control is-valid" id="validationServer01" placeholder="ex. 111 " required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationServer01">Nume Film</label>
+            <input name="nume" type="text" class="form-control is-valid" id="validationServer01" placeholder="ex. Avatar " required>
+          </div>
+		  <div class="col-md-6 mb-3">
+            <label for="validationServer01">Genul Filmului</label>
+            <input name="gen_film" type="text" class="form-control is-valid" id="validationServer01" placeholder="ex.  Actiune" required>
+          </div>
+		  <div class="col-md-6 mb-3">
+            <label for="validationServer01">Durata (min)</label>
+            <input name="durata_min" type="number" class="form-control is-valid" id="validationServer01" placeholder="ex. 162" required>
+          </div>
+		  <div class="col-md-6 mb-3">
+            <label for="validationServer01">Anul Aparitiei</label>
+            <input name="an_aparitie" type="number" class="form-control is-valid" id="validationServer01" placeholder="ex. 2009" required>
+          </div>
+            <div class="col-md-6 mb-3">
+            <label for="validationServer01">Actor Principal</label>
+            <input name="actor_principal" type="text" class="form-control is-valid" id="validationServer01" placeholder="ex. Sam Worthington" required>
+          </div>
+           <!-- <div class="col-md-6 mb-3">
+            <label for="validationServer01">2D/3D</label>
+            <input name="tip_film" type="text" class="form-control is-valid" id="validationServer01" placeholder="ex. 3D" required>
+          </div>-->
+
+          <div class="col-md-6 mb-3">
+            <label for="validationServer01">Tip Act</label>
+            <select name="tip_film" class="custom-select d-block my-3">
+              <option value="">Alege tipul de film</option>
+              {% for com in tip_film %}
+                <option value="{{com}}">{{com}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationServer01">Varsta Minima</label>
+            <select name="varsta_min" class="custom-select d-block my-3">
+              <option value="">Alege varsta minima</option>
+              {% for com in varsta_min %}
+                <option value="{{com}}">{{com}}</option>
+              {% endfor %}
+            </select>
+          </div>
+            <div class="col-md-6 mb-3">
+            <label for="validationServer01">Tarif</label>
+            <input name="tarif" type="number" class="form-control is-valid" id="validationServer01" placeholder="ex. 24.99" required>
+          </div>
+
+          </div>
+
+
+
+         <!-- <div class="col-md-3 mb-3">
+            <label for="validationServer01">Departament</label>
+            <select name="department_id" class="custom-select d-block my-3" >
+              <option value="">Alege departament</option>
+              {% for par in departments %}
+                <option value={{par}}>{{par}}</option>
+              {% endfor %}
+            </select>
+          </div> -->
+
+        <button class="btn btn-primary" type="submit">Adaugare Film</button>
+      </form>
+
+  </center>
+    </div>
+
+  <script type="text/javascript">
+  var $dropdown1 = $("select[name='dropdown1']");
+  var $dropdown2 = $("select[name='dropdown2']");
+  var $dropdown3 = $("select[name='dropdown3']");
+  var disabled = [];
+
+  $dropdown1.change(function() {
+    if(disabled.length == 3){
+      $disabled=[];
+    }
+    $dropdown1.find('option').prop("disabled", false);
+    var selectedItem = $(this).val();
+    disabled.push(selectedItem);
+
+    for (var i = 0; i < disabled.length; ++i){
+        $dropdown2.find('option[value="' + selectedItem[i] + '"]').prop("disabled", true);
+        $dropdown3.find('option[value="' + selectedItem[i] + '"]').prop("disabled", true);
+    }
+  });
+
+  $dropdown2.change(function() {
+    if(disabled.length == 3){
+      $disabled=[];
+    }
+    $dropdown2.find('option').prop("disabled", false);
+    var selectedItem = $(this).val();
+    disabled.push(selectedItem);
+
+    for (var i = 0; i < disabled.length; ++i){
+        $dropdown1.find('option[value="' + selectedItem[i] + '"]').prop("disabled", true);
+        $dropdown3.find('option[value="' + selectedItem[i] + '"]').prop("disabled", true);
+    }
+  });
+
+  $dropdown3.change(function() {
+    if(disabled.length == 3){
+      $disabled=[];
+    }
+    $dropdown3.find('option').prop("disabled", false);
+    var selectedItem = $(this).val();
+    disabled.push(selectedItem);
+
+    for (var i = 0; i < disabled.length; ++i){
+        $dropdown1.find('option[value="' + selectedItem[i] + '"]').prop("disabled", true);
+        $dropdown2.find('option[value="' + selectedItem[i] + '"]').prop("disabled", true);
+    }
+  });
+  /*
+  $dropdown1.change(function() {
+    $dropdown2.children().show();
+    var selectedItem = $($dropdown1).val();
+    if (selectedItem != "")
+      $('select[name="dropdown2"] option[value="' + selectedItem + '"]').hide();
+  });
+
+  $dropdown2.change(function() {
+    $dropdown1.children().show();
+    var selectedItem = $($dropdown2).val();
+    if (selectedItem != "")
+      $('select[name="dropdown1"] option[value="' + selectedItem + '"]').hide();
+  });
+
+  $dropdown3.change(function() {
+    $dropdown1.children().show();
+    $dropdown2.children().show();
+    var selectedItem1 = $($dropdown1).val();
+    var selectedItem2 = $($dropdown2).val();
+    if (selectedItem1 != "" || selectedItem2 != ""){
+      $('select[name="dropdown3"] option[value="' + selectedItem1 + '"]').hide();
+      $('select[name="dropdown3"] option[value="' + selectedItem2 + '"]').hide();
+    }
+  });
+  */
+</script>
+
+</body>
+</html>
